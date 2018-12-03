@@ -10,7 +10,6 @@
 #############################################
 set $mod Mod4
 
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
 set $font System San Francisco Display 10
 set $icon_font FontAwesome 11
 font pango:$font
@@ -57,6 +56,7 @@ bindsym Shift+XF86Display  exec nvidia-settings
 
 # change displaymode
 bindsym $mod+m exec ~/.screenlayout/display-external-monitor-if-connected.sh
+bindsym $mod+n exec ~/.screenlayout/mobi-config.sh
 
 ## display brightness management
 bindsym XF86MonBrightnessUp     exec "xbacklight +10"
@@ -184,6 +184,7 @@ set $screen_internal   "eDP-1"
 set $screen_external_1 "DP-1-1"
 set $screen_external_2 "DP-1-2"
 
+
 workspace $workspace1_chat         output $screen_internal
 workspace $workspace2_mail         output $screen_external_2
 workspace $workspace3_code         output $screen_external_1
@@ -206,7 +207,7 @@ assign [class="keepassxc"]          $workspace7_pwd
 assign [class="Nautilus"]           $workspace5_filebrowser
 assign [class="Eclipse"]            $workspace3_code
 assign [class="jetbrains-idea"]     $workspace3_code
-
+assign [class="Rambox"]             $workspace1_chat
 
 #############################################
 #                 Modes                     #
@@ -270,15 +271,16 @@ bindsym $mod+T mode "$mode_thinkpad"
 #                Autostart                  #
 #############################################
 exec --no-startup-id firefox
-exec --no-startup-id rocketchat-desktop
+#exec --no-startup-id rocketchat-desktop
 exec --no-startup-id thunderbird 
 exec --no-startup-id keepassxc
 exec --no-startup-id nextcloud
 exec --no-startup-id /usr/bin/bash ~/.screenlayout/display-external-monitor-if-connected.sh
 exec --no-startup-id numlockx on
 exec --no-startup-id xautolock -time 3 -locker "$Locker"
+exec --no-startup-id rambox
 
-exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper.jpg
+exec_always --no-startup-id output --bg-scale ~/Pictures/wallpaper.jpg
 
 #############################################
 #                 i3-bar                    #
@@ -289,7 +291,7 @@ bar {
     workspace_buttons  yes
     tray_output        $screen_external_1
     tray_output        $screen_internal
-    status_command     i3blocks -c ~/.config/i3/i3blocks.conf
+    status_command     i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
     font               pango:$font, $icon_font
   colors {
     separator          #666666
