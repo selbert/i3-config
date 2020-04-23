@@ -181,8 +181,8 @@ bindsym $mod+Shift+b            move container to workspace back_and_forth
 
 # workspaces on specific screens
 set $screen_internal   "eDP-1"
-set $screen_external_1 "DP-1-1"
-set $screen_external_2 "DP-1-2"
+set $screen_external_1 "DP-1-2"
+set $screen_external_2 "DP-1-3"
 
 
 workspace $workspace1_chat         output $screen_internal
@@ -206,7 +206,7 @@ assign [class="Firefox"]            $workspace4_browser
 assign [class="keepassxc"]          $workspace7_pwd
 assign [class="Nautilus"]           $workspace5_filebrowser
 assign [class="Eclipse"]            $workspace3_code
-assign [class="jetbrains-idea"]     $workspace3_code
+#assign [class="jetbrains-idea"]     $workspace3_code
 assign [class="Rambox"]             $workspace1_chat
 
 #############################################
@@ -240,6 +240,27 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Brightness
+mode "brightness" {
+        bindsym 1 exec "xrandr --output eDP-1 --brightness 0.1"
+        bindsym 2 exec "xrandr --output eDP-1 --brightness 0.2"
+        bindsym 3 exec "xrandr --output eDP-1 --brightness 0.3"
+        bindsym 4 exec "xrandr --output eDP-1 --brightness 0.4"
+        bindsym 5 exec "xrandr --output eDP-1 --brightness 0.5"
+        bindsym 6 exec "xrandr --output eDP-1 --brightness 0.6"
+        bindsym 7 exec "xrandr --output eDP-1 --brightness 0.7"
+        bindsym 8 exec "xrandr --output eDP-1 --brightness 0.8"
+        bindsym 9 exec "xrandr --output eDP-1 --brightness 0.9"
+        bindsym 0 exec "xrandr --output eDP-1 --brightness 1"
+        
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Ctrl+b mode "brightness"
+
 
 # LockScreen, copied from https://wiki.archlinux.org/index.php/i3#Shutdown.2C_reboot.2C_lock_screen
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
